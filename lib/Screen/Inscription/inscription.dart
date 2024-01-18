@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/auth.dart';
+
 class Inscription extends StatefulWidget {
   const Inscription({super.key});
 
@@ -10,6 +12,13 @@ class Inscription extends StatefulWidget {
 
 class _InscriptionState extends State<Inscription> {
   bool _obscureText = true;
+  // TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController numeroController = TextEditingController();
+  TextEditingController adresseController = TextEditingController();
+  final formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +58,7 @@ class _InscriptionState extends State<Inscription> {
                         topLeft: Radius.circular(45),
                         topRight: Radius.circular(45))),
                 child: Form(
-                  // key: formkey,
+                  key: formkey,
                   child: Column(
                     children: [
                       Container(
@@ -62,19 +71,20 @@ class _InscriptionState extends State<Inscription> {
                             children: [
                               SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height * .08,
+                                    MediaQuery.of(context).size.height * .02,
                               ),
                               TextFormField(
+                                controller: usernameController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return " Le nom d'utilisateur est obligatoire ! ";
+                                    return " Le nom est obligatoire ! ";
                                   } else if (value.length < 3) {
-                                    return "le nom d'utilisateur doit contenir au minimum (3) caractères !";
+                                    return "le nom doit contenir au minimum (3) caractères !";
                                   }
                                   return null;
                                 },
                                 decoration: InputDecoration(
-                                    labelText: 'Nom d\'utilisateur *',
+                                    labelText: 'Nom Prénom *',
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.circular(10),
                                       borderSide: BorderSide.none,
@@ -96,6 +106,7 @@ class _InscriptionState extends State<Inscription> {
 
                               //numero
                               TextFormField(
+                                controller: numeroController,
                                 keyboardType: TextInputType.phone,
                                 validator: (value) {
                                   if (value!.isEmpty) {
@@ -127,30 +138,32 @@ class _InscriptionState extends State<Inscription> {
                               ),
 
                               //email
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    labelText: 'Email ',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
-                                    hintText: 'bak@gmail.com',
-                                    hintStyle: const TextStyle(fontSize: 18),
-                                    prefixIcon: Icon(
-                                      CupertinoIcons.mail,
-                                      color: Colors.blueGrey,
-                                      size: 30,
-                                    )),
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * .02,
-                              ),
+                              // TextFormField(
+                              //   controller: emailController,
+                              //   decoration: InputDecoration(
+                              //       labelText: 'Email ',
+                              //       border: OutlineInputBorder(
+                              //         borderRadius: BorderRadius.circular(10),
+                              //         borderSide: BorderSide.none,
+                              //       ),
+                              //       filled: true,
+                              //       fillColor: Color(0xFFe7edeb),
+                              //       hintText: 'bak@gmail.com',
+                              //       hintStyle: const TextStyle(fontSize: 18),
+                              //       prefixIcon: Icon(
+                              //         CupertinoIcons.mail,
+                              //         color: Colors.blueGrey,
+                              //         size: 30,
+                              //       )),
+                              // ),
+                              // SizedBox(
+                              //   height:
+                              //       MediaQuery.of(context).size.height * .02,
+                              // ),
 
                               //adresse
                               TextFormField(
+                                controller: adresseController,
                                 decoration: InputDecoration(
                                     labelText: 'Adresse',
                                     border: OutlineInputBorder(
@@ -167,10 +180,14 @@ class _InscriptionState extends State<Inscription> {
                                       size: 30,
                                     )),
                               ),
-                              //SizedBox(height: MediaQuery.of(context).size.height * .02,),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * .02,
+                              ),
 
                               //mot de passe
                               TextFormField(
+                                controller: passwordController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return " Le mot de passe est obligatoire! ";
@@ -221,14 +238,31 @@ class _InscriptionState extends State<Inscription> {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            backgroundColor: Colors.blue,
                             elevation: 3,
                           ),
-                          onPressed: () async {},
+                          onPressed: () async {
+                            if (formkey.currentState!.validate()) {
+                              final String email = "${numeroController.text}@gmail.com";
+                              final result = await signUpWithEmailPassword(
+                                  email,
+                                  passwordController.text);
+                              if (result != null) {
+                                
+                                // Navigator.of(context).pushReplacement(
+                                //     MaterialPageRoute(
+                                //         builder: (_) => const Connexions()));
+                              }
+                            }
+                          },
                           child: const Text(
                             'Inscription',
                             style: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
