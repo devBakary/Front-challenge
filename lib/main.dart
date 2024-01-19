@@ -29,6 +29,29 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: const Color(0xFFe7edeb),
+          prefixIconColor: Colors.blueGrey,
+          focusColor: Colors.blueGrey,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: Colors.blue),
+          ),
+        ),
+        datePickerTheme: const DatePickerThemeData(
+      // dividerColor: primaryColor,
+      headerHeadlineStyle: TextStyle(
+        color: Colors.black,
+        // fontFamily: fontFamily,
+        fontWeight: FontWeight.normal,
+        fontSize: 20,
+      ),
+    ),
       ),
   home: Accueil(),
     );

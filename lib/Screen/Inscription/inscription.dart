@@ -1,5 +1,9 @@
+import 'package:challenge_front/Screen/formulaires/nationalit%C3%A9_casier.dart';
+import 'package:challenge_front/models/users.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../services/auth.dart';
 
 class Inscription extends StatefulWidget {
   const Inscription({super.key});
@@ -10,6 +14,13 @@ class Inscription extends StatefulWidget {
 
 class _InscriptionState extends State<Inscription> {
   bool _obscureText = true;
+  // TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController numeroController = TextEditingController();
+  TextEditingController adresseController = TextEditingController();
+  final formkey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +40,7 @@ class _InscriptionState extends State<Inscription> {
             Expanded(
               flex: 2,
               child: Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Center(
                   child: Image.asset(
                     "assets/images/loggo.png",
@@ -49,7 +60,7 @@ class _InscriptionState extends State<Inscription> {
                         topLeft: Radius.circular(45),
                         topRight: Radius.circular(45))),
                 child: Form(
-                  // key: formkey,
+                  key: formkey,
                   child: Column(
                     children: [
                       Container(
@@ -62,30 +73,23 @@ class _InscriptionState extends State<Inscription> {
                             children: [
                               SizedBox(
                                 height:
-                                    MediaQuery.of(context).size.height * .08,
+                                    MediaQuery.of(context).size.height * .02,
                               ),
                               TextFormField(
+                                controller: usernameController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
-                                    return " Le nom d'utilisateur est obligatoire ! ";
+                                    return " Le nom est obligatoire ! ";
                                   } else if (value.length < 3) {
-                                    return "le nom d'utilisateur doit contenir au minimum (3) caractères !";
+                                    return "le nom doit contenir au minimum (3) caractères !";
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
-                                    labelText: 'Nom d\'utilisateur *',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
+                                decoration: const InputDecoration(
+                                    labelText: 'Nom Prénom *',
                                     hintText: 'Nom d\'utilisateur',
-                                    hintStyle: const TextStyle(fontSize: 18),
                                     prefixIcon: Icon(
                                       Icons.person,
-                                      color: Colors.blueGrey,
                                       size: 30,
                                     )),
                               ),
@@ -96,7 +100,9 @@ class _InscriptionState extends State<Inscription> {
 
                               //numero
                               TextFormField(
+                                controller: numeroController,
                                 keyboardType: TextInputType.phone,
+                                maxLength: 8,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return " Le numero est obligatoire !";
@@ -105,42 +111,11 @@ class _InscriptionState extends State<Inscription> {
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Numero *',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
                                     hintText: 'Numero de telephone *',
-                                    hintStyle: const TextStyle(fontSize: 18),
                                     prefixIcon: Icon(
                                       CupertinoIcons.phone,
-                                      color: Colors.blueGrey,
-                                      size: 30,
-                                    )),
-                              ),
-                              SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * .02,
-                              ),
-
-                              //email
-                              TextFormField(
-                                decoration: InputDecoration(
-                                    labelText: 'Email ',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
-                                    hintText: 'bak@gmail.com',
-                                    hintStyle: const TextStyle(fontSize: 18),
-                                    prefixIcon: Icon(
-                                      CupertinoIcons.mail,
-                                      color: Colors.blueGrey,
                                       size: 30,
                                     )),
                               ),
@@ -151,26 +126,23 @@ class _InscriptionState extends State<Inscription> {
 
                               //adresse
                               TextFormField(
-                                decoration: InputDecoration(
+                                controller: adresseController,
+                                decoration: const InputDecoration(
                                     labelText: 'Adresse',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
                                     hintText: 'Adresse',
-                                    hintStyle: const TextStyle(fontSize: 18),
                                     prefixIcon: Icon(
                                       CupertinoIcons.location,
-                                      color: Colors.blueGrey,
                                       size: 30,
                                     )),
                               ),
-                              //SizedBox(height: MediaQuery.of(context).size.height * .02,),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * .02,
+                              ),
 
                               //mot de passe
                               TextFormField(
+                                controller: passwordController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return " Le mot de passe est obligatoire! ";
@@ -192,26 +164,15 @@ class _InscriptionState extends State<Inscription> {
                                           ? Icons.visibility
                                           : Icons.visibility_off),
                                     ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
                                     hintText: 'Mot de passe ',
-                                    prefixIcon: Icon(
+                                    prefixIcon: const Icon(
                                       Icons.key,
-                                      color: Colors.blueGrey,
                                       size: 30,
                                     )),
                               ),
                             ],
                           ),
                         ),
-                      ),
-
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .02,
                       ),
 
                       //container contenant le bouton de inscription
@@ -221,14 +182,39 @@ class _InscriptionState extends State<Inscription> {
                         height: 50,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            backgroundColor: Colors.blue,
                             elevation: 3,
                           ),
-                          onPressed: () async {},
+                          onPressed: () async {
+                            if (formkey.currentState!.validate()) {
+                              final String email =
+                                  "${numeroController.text}@gmail.com";
+                              final result = await signUpWithEmailPassword(
+                                  email, passwordController.text);
+                              if (result != null) {
+                                User new_user = User(
+                                    uid: result.uid,
+                                    password: passwordController.text,
+                                    name: usernameController.text,
+                                    phone: numeroController.text,
+                                    address: adresseController.text,
+                                    identifiant: 'user');
+                                await new_user.createUser(new_user);
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            FormulairePage(title: 'test', description: 'nation', imageAsset: '',)));
+                              }
+                            }
+                          },
                           child: const Text(
                             'Inscription',
                             style: TextStyle(
-                                fontSize: 28, fontWeight: FontWeight.bold),
+                                color: Colors.white,
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
