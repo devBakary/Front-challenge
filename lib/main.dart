@@ -1,3 +1,4 @@
+import 'package:challenge_front/Screen/Accueil/Accueil.dart';
 import 'package:challenge_front/Screen/Inscription/inscription.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Sebenw',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Inscription(),
+  home: Accueil(),
     );
   }
 }
