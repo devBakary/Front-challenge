@@ -1,3 +1,5 @@
+import 'package:challenge_front/Screen/formulaires/nationalit%C3%A9_casier.dart';
+import 'package:challenge_front/models/users.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -38,7 +40,7 @@ class _InscriptionState extends State<Inscription> {
             Expanded(
               flex: 2,
               child: Container(
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 child: Center(
                   child: Image.asset(
                     "assets/images/loggo.png",
@@ -83,19 +85,11 @@ class _InscriptionState extends State<Inscription> {
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Nom Prénom *',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
                                     hintText: 'Nom d\'utilisateur',
-                                    hintStyle: const TextStyle(fontSize: 18),
                                     prefixIcon: Icon(
                                       Icons.person,
-                                      color: Colors.blueGrey,
                                       size: 30,
                                     )),
                               ),
@@ -108,6 +102,7 @@ class _InscriptionState extends State<Inscription> {
                               TextFormField(
                                 controller: numeroController,
                                 keyboardType: TextInputType.phone,
+                                maxLength: 8,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return " Le numero est obligatoire !";
@@ -116,19 +111,11 @@ class _InscriptionState extends State<Inscription> {
                                   }
                                   return null;
                                 },
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Numero *',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
                                     hintText: 'Numero de telephone *',
-                                    hintStyle: const TextStyle(fontSize: 18),
                                     prefixIcon: Icon(
                                       CupertinoIcons.phone,
-                                      color: Colors.blueGrey,
                                       size: 30,
                                     )),
                               ),
@@ -137,46 +124,14 @@ class _InscriptionState extends State<Inscription> {
                                     MediaQuery.of(context).size.height * .02,
                               ),
 
-                              //email
-                              // TextFormField(
-                              //   controller: emailController,
-                              //   decoration: InputDecoration(
-                              //       labelText: 'Email ',
-                              //       border: OutlineInputBorder(
-                              //         borderRadius: BorderRadius.circular(10),
-                              //         borderSide: BorderSide.none,
-                              //       ),
-                              //       filled: true,
-                              //       fillColor: Color(0xFFe7edeb),
-                              //       hintText: 'bak@gmail.com',
-                              //       hintStyle: const TextStyle(fontSize: 18),
-                              //       prefixIcon: Icon(
-                              //         CupertinoIcons.mail,
-                              //         color: Colors.blueGrey,
-                              //         size: 30,
-                              //       )),
-                              // ),
-                              // SizedBox(
-                              //   height:
-                              //       MediaQuery.of(context).size.height * .02,
-                              // ),
-
                               //adresse
                               TextFormField(
                                 controller: adresseController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Adresse',
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
                                     hintText: 'Adresse',
-                                    hintStyle: const TextStyle(fontSize: 18),
                                     prefixIcon: Icon(
                                       CupertinoIcons.location,
-                                      color: Colors.blueGrey,
                                       size: 30,
                                     )),
                               ),
@@ -209,26 +164,15 @@ class _InscriptionState extends State<Inscription> {
                                           ? Icons.visibility
                                           : Icons.visibility_off),
                                     ),
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                      borderSide: BorderSide.none,
-                                    ),
-                                    filled: true,
-                                    fillColor: Color(0xFFe7edeb),
                                     hintText: 'Mot de passe ',
-                                    prefixIcon: Icon(
+                                    prefixIcon: const Icon(
                                       Icons.key,
-                                      color: Colors.blueGrey,
                                       size: 30,
                                     )),
                               ),
                             ],
                           ),
                         ),
-                      ),
-
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * .02,
                       ),
 
                       //container contenant le bouton de inscription
@@ -245,15 +189,23 @@ class _InscriptionState extends State<Inscription> {
                           ),
                           onPressed: () async {
                             if (formkey.currentState!.validate()) {
-                              final String email = "${numeroController.text}@gmail.com";
+                              final String email =
+                                  "${numeroController.text}@gmail.com";
                               final result = await signUpWithEmailPassword(
-                                  email,
-                                  passwordController.text);
+                                  email, passwordController.text);
                               if (result != null) {
-                                
-                                // Navigator.of(context).pushReplacement(
-                                //     MaterialPageRoute(
-                                //         builder: (_) => const Connexions()));
+                                User new_user = User(
+                                    uid: result.uid,
+                                    password: passwordController.text,
+                                    name: usernameController.text,
+                                    phone: numeroController.text,
+                                    address: adresseController.text,
+                                    identifiant: 'user');
+                                await new_user.createUser(new_user);
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            FormulairePage(title: 'test', description: 'nation', imageAsset: '',)));
                               }
                             }
                           },
