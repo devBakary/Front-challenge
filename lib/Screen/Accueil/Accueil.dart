@@ -20,10 +20,9 @@ class _AccueilState extends State<Accueil> {
 
   //liste de mes items
   final List<String> images = [
-    "assets/images/imgee.jpg",
-    "assets/images/imgee.jpg",
-    "assets/images/ggg.png",
-    "assets/images/loggo.png",
+    "assets/images/doc.jpg",
+    "assets/images/img.jpg",
+    "assets/images/nai.png",
   ];
 
   @override
@@ -35,18 +34,57 @@ class _AccueilState extends State<Accueil> {
             padding: EdgeInsets.zero,
             children: <Widget>[
               headerWidget(),
-              DrawerItem(
-                name: 'Accueil',
-                icon: Icons.home,
-                onPressed: () => onItemPressed(context, index: 0),
+              ListTile(
+                title: Text('Accueil'),
+                onTap: () {
+                  // Ajoutez ici le code que vous souhaitez exécuter lorsque l'élément est sélectionné
+                  Navigator.pop(context); // Ferme le drawer
+                },
+              ),
+              ListTile(
+                title: Text('Extrait de Naissance'),
+                onTap: () {
+                  // Ajoutez ici le code que vous souhaitez exécuter lorsque l'élément est sélectionné
+                  Navigator.pop(context); // Ferme le drawer
+                },
+              ),
+              ListTile(
+                title: Text('Certificat Nationalité'),
+                onTap: () {
+                  // Ajoutez ici le code que vous souhaitez exécuter lorsque l'élément est sélectionné
+                  Navigator.pop(context); // Ferme le drawer
+                },
+              ),
+              ListTile(
+                title: Text('Casier judiciere'),
+                onTap: () {
+                  // Ajoutez ici le code que vous souhaitez exécuter lorsque l'élément est sélectionné
+                  Navigator.pop(context); // Ferme le drawer
+                },
+              ),
+              ListTile(
+                title: Text('Aide'),
+                onTap: () {
+                  // Ajoutez ici le code que vous souhaitez exécuter lorsque l'élément est sélectionné
+                  Navigator.pop(context); // Ferme le drawer
+                },
+              ),
+              ListTile(
+                title: Text('A propos'),
+                onTap: () {
+                  // Ajoutez ici le code que vous souhaitez exécuter lorsque l'élément est sélectionné
+                  Navigator.pop(context); // Ferme le drawer
+                },
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * .015,
+                height: 5,
               ),
-              DrawerItem(
-                name: 'Appel d\'urgence ',
-                icon: CupertinoIcons.phone_fill,
-                onPressed: () => onItemPressed(context, index: 1),
+              ListTile(
+                title: Text('Deconnexion'),
+                onTap: () {
+                  // Ajoutez ici le code que vous souhaitez exécuter lorsque l'élément est sélectionné
+                  Navigator.pop(context); // Ferme le drawer
+                },
               ),
             ],
           ),
@@ -417,7 +455,7 @@ showDialogWidget(BuildContext context) {
                             Padding(
                               padding: EdgeInsets.only(right: 20),
                               child: Text(
-                                "votre rendez-vous pour recuperer votre document est à 14h",
+                                "votre rdv est à 14h",
                                 style: TextStyle(fontSize: 16),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 5,

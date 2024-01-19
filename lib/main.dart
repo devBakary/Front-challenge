@@ -1,5 +1,6 @@
 import 'package:challenge_front/Screen/Accueil/Accueil.dart';
 import 'package:challenge_front/Screen/Inscription/inscription.dart';
+import 'package:challenge_front/Screen/formulaires/nationalit%C3%A9_casier.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,16 +45,16 @@ class MyApp extends StatelessWidget {
           ),
         ),
         datePickerTheme: const DatePickerThemeData(
-      // dividerColor: primaryColor,
-      headerHeadlineStyle: TextStyle(
-        color: Colors.black,
-        // fontFamily: fontFamily,
-        fontWeight: FontWeight.normal,
-        fontSize: 20,
+          // dividerColor: primaryColor,
+          headerHeadlineStyle: TextStyle(
+            color: Colors.black,
+            // fontFamily: fontFamily,
+            fontWeight: FontWeight.normal,
+            fontSize: 20,
+          ),
+        ),
       ),
-    ),
-      ),
-  home: Accueil(),
+      home: Accueil(),
     );
   }
 }
