@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:challenge_front/Screen/navigation/drawer%20item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,14 +30,32 @@ class _AccueilState extends State<Accueil> {
   Widget build(BuildContext context) {
     return Builder(builder: (context) {
       return Scaffold(
-        drawer: NavigationDrawer(
-          children: [],
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              headerWidget(),
+              DrawerItem(
+                name: 'Accueil',
+                icon: Icons.home,
+                onPressed: () => onItemPressed(context, index: 0),
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .015,
+              ),
+              DrawerItem(
+                name: 'Appel d\'urgence ',
+                icon: CupertinoIcons.phone_fill,
+                onPressed: () => onItemPressed(context, index: 1),
+              ),
+            ],
+          ),
         ),
         appBar: AppBar(
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
-                icon: Icon(Icons.menu),
+                icon: Icon(Icons.menu, color: Colors.white),
                 iconSize: 35,
                 alignment: Alignment.center,
                 onPressed: () {
@@ -59,7 +78,7 @@ class _AccueilState extends State<Accueil> {
                 onPressed: () {
                   showDialogWidget(context);
                 },
-                icon: Icon(Icons.menu),
+                icon: Icon(Icons.notifications, color: Colors.white, size: 30),
               ),
             )
           ],
@@ -119,11 +138,13 @@ class _AccueilState extends State<Accueil> {
                             //Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Appel()));
                           },
                           child: Container(
+                            alignment: Alignment.center,
                             decoration: BoxDecoration(
                                 color: Color(0xFFD42125),
                                 borderRadius: BorderRadius.circular(25)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: const [
                                 Icon(
                                   Icons.call,
@@ -131,7 +152,8 @@ class _AccueilState extends State<Accueil> {
                                   color: Colors.white,
                                 ),
                                 Text(
-                                  "Extrait de Naissance",
+                                  "Extrait d'acte Naissance",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -164,6 +186,7 @@ class _AccueilState extends State<Accueil> {
                                 ),
                                 Text(
                                   "Certificat de Nationalité",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -197,6 +220,7 @@ class _AccueilState extends State<Accueil> {
                                 ),
                                 Text(
                                   "Casier Judiciere",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -229,6 +253,7 @@ class _AccueilState extends State<Accueil> {
                                 ),
                                 Text(
                                   "Certificat de Residence",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 18,
@@ -248,6 +273,79 @@ class _AccueilState extends State<Accueil> {
         ),
       );
     });
+  }
+}
+
+Widget headerWidget() {
+  return InkWell(
+    child: Container(
+      padding: EdgeInsets.all(10),
+      color: Colors.blue,
+      child: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 120,
+            padding: EdgeInsets.all(10),
+            child: const CircleAvatar(
+              radius: 40,
+              //backgroundImage: Image.asset(name)
+            ),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Text(
+            "Nom Complet",
+            style: TextStyle(fontSize: 24, color: Colors.white),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+void onItemPressed(BuildContext context, {required int index}) {
+  Navigator.pop(context);
+
+  switch (index) {
+    case 0:
+      // Navigator.push(context, MaterialPageRoute(builder: (_) => Accueil()));
+      break;
+
+    case 1:
+      //  Navigator.push(context, MaterialPageRoute(builder: (_) => Appel()));
+      break;
+
+    case 2:
+      //  Navigator.push(context, MaterialPageRoute(builder: (_) => Homescreen()));
+      break;
+
+    case 3:
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (_) => GesteSecours()));
+      break;
+
+    case 4:
+      // Navigator.push(context, MaterialPageRoute(builder: (_) => MaFiche()));
+      break;
+
+    case 5:
+      // Navigator.push(context, MaterialPageRoute(builder: (_) => Aide()));
+      break;
+
+    case 6:
+      // Navigator.push(context, MaterialPageRoute(builder: (_) => Apropos()));
+      break;
+
+    case 7:
+      // Navigator.pushAndRemoveUntil(context,
+      //     MaterialPageRoute(builder: (_) => Connexions()), (route) => false);
+      break;
+
+    default:
+      Navigator.pop(context);
+      break;
   }
 }
 
@@ -300,7 +398,6 @@ showDialogWidget(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Container(
-                        alignment: Alignment.center,
                         child: CircleAvatar(
                             child: Icon(
                           Icons.person,
@@ -317,10 +414,13 @@ showDialogWidget(BuildContext context) {
                             Text("Mamank99",
                                 style: TextStyle(
                                     fontSize: 20, fontWeight: FontWeight.w700)),
-                            Container(
+                            Padding(
+                              padding: EdgeInsets.only(right: 20),
                               child: Text(
-                                "Bonjour, votre rendez-vous pour recuperer votre document est à 14h a la commune I",
-                                style: TextStyle(fontSize: 16)
+                                "votre rendez-vous pour recuperer votre document est à 14h",
+                                style: TextStyle(fontSize: 16),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 5,
                               ),
                             )
                           ]))
