@@ -26,20 +26,21 @@ class _FormulairePageState extends State<FormulairePage> {
   void _pickImages() async {
     print('eeeeeeeee');
     // Open the image picker
-    image = await picker.pickImage(source: ImageSource.gallery);
-    setState(() async {});
+    final _image = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      image = _image;
+    });
   }
 
   void _takePhotos() async {
     print('eeeeeeeee');
-    image = await picker.pickImage(
+    final _image = await picker.pickImage(
       source: ImageSource.camera,
     );
-
     // Add the taken image to the list
-    if (image != null) {
+    if (_image != null) {
       setState(() {
-        this.image = image;
+        image = _image;
       });
     }
   }
@@ -272,6 +273,13 @@ Widget formulaireNationaliteCasier(BuildContext context,
                 height: 20,
               ),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  onPrimary: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
                 onPressed: () {},
                 child: const Text('Envoye votre demande'),
               )
