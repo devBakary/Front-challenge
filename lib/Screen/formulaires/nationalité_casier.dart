@@ -66,6 +66,11 @@ class _FormulairePageState extends State<FormulairePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Formulaire'),
+        centerTitle: true,
+        backgroundColor: Colors.blue,
+      ),
       backgroundColor: const Color(0xFFe7edeb),
       body: SingleChildScrollView(
         child: Padding(

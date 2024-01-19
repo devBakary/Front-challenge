@@ -1,10 +1,12 @@
 import 'package:challenge_front/Screen/Accueil/Accueil.dart';
 import 'package:challenge_front/Screen/Inscription/inscription.dart';
 import 'package:challenge_front/Screen/formulaires/nationalit%C3%A9_casier.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'Screen/Authentification/auth.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -17,6 +19,8 @@ void main() async {
     runApp(const MyApp());
   });
 }
+
+final _auth = FirebaseAuth.instance;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

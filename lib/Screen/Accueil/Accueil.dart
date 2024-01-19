@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:challenge_front/Screen/formulaires/nationalit%C3%A9_casier.dart';
 import 'package:challenge_front/Screen/navigation/drawer%20item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -173,21 +174,31 @@ class _AccueilState extends State<Accueil> {
                         padding: EdgeInsets.all(5),
                         child: InkWell(
                           onTap: () {
-                            //Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Appel()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => const FormulairePage(
+                                      title: 'Nationalité',
+                                      description: 'Faire une Demande ',
+                                      imageAsset: 'assets/images/extrai.jpg',
+                                    )));
                           },
                           child: Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                                color: Color(0xFFD42125),
+                                color: Colors.grey,
                                 borderRadius: BorderRadius.circular(25)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.call,
-                                  size: 80,
-                                  color: Colors.white,
+                              children: [
+                                Container(
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 5),
+                                  child: Image.asset(
+                                    "assets/images/extrai.jpg",
+                                    // width: 80,
+                                    // height: 70,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 Text(
                                   "Extrait d'acte Naissance",
@@ -208,19 +219,31 @@ class _AccueilState extends State<Accueil> {
                         padding: EdgeInsets.all(5),
                         child: InkWell(
                           onTap: () {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (_) =>Homescreen()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => const FormulairePage(
+                                      title: 'Certificat de Nationalité',
+                                      description:
+                                          'Demander votre certificat de nationnalité',
+                                      imageAsset: 'assets/images/casier.jpg',
+                                    )));
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Color(0xFFD42125),
+                                color: Colors.grey,
                                 borderRadius: BorderRadius.circular(25)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  CupertinoIcons.person_crop_circle,
-                                  size: 80,
-                                  color: Colors.white,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  height: 80,
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 5),
+                                  child: Image.asset(
+                                    "assets/images/casier.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 Text(
                                   "Certificat de Nationalité",
@@ -242,22 +265,32 @@ class _AccueilState extends State<Accueil> {
 //
                         child: InkWell(
                           onTap: () {
-                            // Navigator.of(context).push(MaterialPageRoute(builder: (_) =>MaFiche()));
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => const FormulairePage(
+                                      title: 'Nationalité',
+                                      description: 'Faire une Demande ',
+                                      imageAsset: 'assets/images/casier.jpg',
+                                    )));
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Color(0xFF0054E0),
+                                color: Colors.grey,
                                 borderRadius: BorderRadius.circular(25)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.perm_contact_cal,
-                                  size: 80,
-                                  color: Colors.white,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  height: 80,
+                                  padding:
+                                      const EdgeInsets.only(left: 5, right: 5),
+                                  child: Image.asset(
+                                    "assets/images/natio.jpg",
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                                 Text(
-                                  "Casier Judiciere",
+                                  "Casier Judicière",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -279,7 +312,7 @@ class _AccueilState extends State<Accueil> {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Color(0xFF0054E0),
+                                color: Colors.grey,
                                 borderRadius: BorderRadius.circular(25)),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
