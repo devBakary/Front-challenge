@@ -12,8 +12,6 @@ class NavigationDrawer extends StatefulWidget {
 }
 
 class _NavigationDrawerState extends State<NavigationDrawer> {
-  bool _isSelected = true;
-
   @override
   void initState() {
     super.initState();
@@ -26,11 +24,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
       width: MediaQuery.of(context).size.width * .80,
       child: Material(
         elevation: 5,
-        color: Colors.white,
+        color: Colors.red,
         child: Column(
           children: [
             headerWidget(),
-           
+
             const Divider(
               color: Colors.black,
               thickness: 2,
@@ -172,38 +170,31 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
   }
 
   Widget headerWidget() {
-    return uUsername == null
-        ? Container(
-            //height: MediaQuery.of(context).size.height,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          )
-        : InkWell(
-            child: Container(
+    return InkWell(
+      child: Container(
+        padding: EdgeInsets.all(10),
+        color: Colors.blue,
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 120,
               padding: EdgeInsets.all(10),
-              color: Colors.blue,
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 120,
-                    padding: EdgeInsets.all(10),
-                    child: const CircleAvatar(
-                      radius: 40,
-                      //backgroundImage: Image.asset(name)
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  ),
-                  Text(
-                    uUsername,
-                    style: TextStyle(fontSize: 24, color: Colors.white),
-                  ),
-                ],
+              child: const CircleAvatar(
+                radius: 40,
+                //backgroundImage: Image.asset(name)
               ),
             ),
-          );
+            const SizedBox(
+              width: 20,
+            ),
+            Text(
+              "Nom Complet",
+              style: TextStyle(fontSize: 24, color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
