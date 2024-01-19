@@ -57,8 +57,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      // home: _auth.currentUser != null ? Accueil() : const Authentification(),
-      home: const Authentification(),
+      home: _auth.currentUser != null ? Accueil() : const Inscription(),
+      // home: const Authentification(),
     );
   }
 }

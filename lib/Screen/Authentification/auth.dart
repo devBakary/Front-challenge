@@ -1,3 +1,5 @@
+import 'package:challenge_front/Screen/Accueil/Accueil.dart';
+import 'package:challenge_front/Screen/Inscription/inscription.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/auth.dart';
@@ -55,13 +57,14 @@ class _AuthentificationState extends State<Authentification> {
                   fontWeight: FontWeight.w600),
             ),
             TextFormField(
+              controller: emailController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
                 ),
                 filled: true,
-                fillColor: Color(0xFF3F5769),
+                fillColor: Color(0xFFe7edeb),
                 hintText: '91 22 88 29 ',
               ),
             ),
@@ -77,13 +80,14 @@ class _AuthentificationState extends State<Authentification> {
                   fontWeight: FontWeight.w600),
             ),
             TextFormField(
+              controller: passwordController,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                     borderSide: BorderSide.none,
                   ),
                   filled: true,
-                  fillColor: Color(0xFF3F5769),
+                  fillColor: Color(0xFFe7edeb),
                   hintText: 'Mot de passe',
                   suffixIcon: const Icon(
                     Icons.check_circle,
@@ -99,7 +103,7 @@ class _AuthentificationState extends State<Authentification> {
               alignment: Alignment.centerRight,
               child: const Text(
                 'Mot de passe oublié?',
-                style: TextStyle(color: Colors.blue),
+                style: TextStyle(color: Colors.white),
               ),
             ),
             const SizedBox(
@@ -108,8 +112,23 @@ class _AuthentificationState extends State<Authentification> {
             Container(
               width: double.infinity,
               height: 50,
+              // color: Colors.blue,
               child: ElevatedButton(
-                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  primary: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                ),
+                onPressed: () async {
+                  final email = emailController.text + '@gmail.com';
+                  final result = await signInWithEmailPassword(
+                      email, passwordController.text);
+                  if (result != null) {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (_) => Accueil()));
+                  }
+                },
                 child: const Text(
                   "Se Connecter",
                   style: TextStyle(
@@ -193,7 +212,16 @@ class _AuthentificationState extends State<Authentification> {
                   ),
                   Container(
                     child: ElevatedButton(
-                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (_) => const Inscription()));
+                      },
                       child: const Text(
                         "S'inscrire",
                         style: TextStyle(

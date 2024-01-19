@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../services/auth.dart';
+import '../Authentification/auth.dart';
 
 class Inscription extends StatefulWidget {
   const Inscription({super.key});
@@ -205,7 +206,7 @@ class _InscriptionState extends State<Inscription> {
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (_) =>
-                                            FormulairePage(title: 'test', description: 'nation', imageAsset: '',)));
+                                            const Authentification()));
                               }
                             }
                           },
