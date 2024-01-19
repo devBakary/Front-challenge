@@ -1,9 +1,11 @@
 import 'package:challenge_front/Screen/Accueil/Accueil.dart';
 import 'package:challenge_front/Screen/Inscription/inscription.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'Screen/Authentification/auth.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -16,6 +18,8 @@ void main() async {
     runApp(const MyApp());
   });
 }
+
+final _auth = FirebaseAuth.instance;
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -44,16 +48,17 @@ class MyApp extends StatelessWidget {
           ),
         ),
         datePickerTheme: const DatePickerThemeData(
-      // dividerColor: primaryColor,
-      headerHeadlineStyle: TextStyle(
-        color: Colors.black,
-        // fontFamily: fontFamily,
-        fontWeight: FontWeight.normal,
-        fontSize: 20,
+          // dividerColor: primaryColor,
+          headerHeadlineStyle: TextStyle(
+            color: Colors.black,
+            // fontFamily: fontFamily,
+            fontWeight: FontWeight.normal,
+            fontSize: 20,
+          ),
+        ),
       ),
-    ),
-      ),
-  home: Accueil(),
+      // home: _auth.currentUser != null ? Accueil() : const Authentification(),
+      home: const Authentification(),
     );
   }
 }
