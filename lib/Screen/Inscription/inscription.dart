@@ -44,7 +44,7 @@ class _InscriptionState extends State<Inscription> {
                 padding: const EdgeInsets.only(top: 20),
                 child: Center(
                   child: Image.asset(
-                    "assets/images/loggo.png",
+                    "assets/images/logo.jpg",
                     width: 600,
                     height: 600,
                   ),
